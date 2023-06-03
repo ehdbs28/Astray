@@ -48,14 +48,6 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         inputModule.OnSprintKeyPress += SetSprint;
     }
 
-    public override void OnDestroyModule(){
-        PlayerInputModule inputModule = _controller.GetModule<PlayerInputModule>();
-
-        inputModule.OnMovementKeyPress -= SetMovementVelocity;
-        inputModule.OnJumpKeyPress -= SetJump;
-        inputModule.OnSprintKeyPress -= SetSprint;
-    }
-
     public override void OnFixedUpdateModule()
     {
         CalcPlayerMovement();
@@ -93,7 +85,7 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         }
     }
         
-    public void SetJump(){
+    private void SetJump(){
         if(_canJump == false)
             return;
 
@@ -103,12 +95,14 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         _animationModule.SetJump(_isJump);
     }
 
-    public void SetSprint(bool value){
+    private void SetSprint(bool value){
         _isSprint = value;
         _animationModule.SetSprint(_isSprint);
     }
 
-    public void SetMovementVelocity(Vector3 value){
+    private void SetMovementVelocity(Vector3 value){
+        _animationModule.SetBackward(value.x != _controller.FrontDir);
+
         _inputVelocity = new Vector3(value.x, 0, 0);
         _movementVelocity = new Vector3(value.x, 0, 0);
     } 
@@ -132,4 +126,5 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     }
 
     public override void OnUpdateModule(){}
+    public override void OnDestroyModule(){}
 }

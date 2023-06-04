@@ -7,13 +7,23 @@ using UnityEngine;
 public class WeaponInputModule : CommonModule<WeaponController>
 {
     public event Action<float> OnMouseAngleCheck = null;
+    public event Action OnAttackKeyPress = null;
+    public event Action<Vector3> OnAttackDirCheck = null;
 
     public override void OnUpdateModule(){
         UpdateMouseAngle();
+        UpdateAttackInput();
     }
 
     public override void OnDestroyModule(){
         OnMouseAngleCheck = null;
+        OnAttackKeyPress = null;
+    }
+
+    private void UpdateAttackInput(){
+        if(Input.GetMouseButtonDown(0)){
+            OnAttackKeyPress?.Invoke();
+        }
     }
 
     private void UpdateMouseAngle(){
@@ -22,6 +32,7 @@ public class WeaponInputModule : CommonModule<WeaponController>
         Vector3 worldMousePos = MainCam.ScreenToWorldPoint(screenMousePos);
 
         Vector3 dir = (worldMousePos - transform.position).normalized;
+        OnAttackDirCheck?.Invoke(dir);
 
         float cos = Vector3.Dot(Vector3.right, dir);
         float theta = Mathf.Acos(cos) * Mathf.Rad2Deg;

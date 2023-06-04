@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class PlayerInputModule : CommonModule<PlayerController>
 {
+    public event Action<Vector3> OnMovementKeyPress = null;
+    public event Action OnJumpKeyPress = null;
+    public event Action<bool> OnSprintKeyPress = null;
+    public event Action<int> OnFrontDirCheck = null;
+
     [SerializeField]
     private KeyCode _jumpKey;
 
     [SerializeField]
     private KeyCode _sprintKey;
-
-    public event Action<Vector3> OnMovementKeyPress = null;
-    public event Action OnJumpKeyPress = null;
-    public event Action<bool> OnSprintKeyPress = null;
-    public event Action<int> OnFrontDirCheck = null;
 
     private Vector3 _dirInput;
 

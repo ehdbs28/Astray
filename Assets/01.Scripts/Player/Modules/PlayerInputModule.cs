@@ -42,10 +42,10 @@ public class PlayerInputModule : CommonModule<PlayerController>
     }
 
     private void UpdateSprintInput(){
-        if(Input.GetKeyDown(_sprintKey)){
+        if(Input.GetKeyDown(_sprintKey) || Input.GetKey(_sprintKey)){
             OnSprintKeyPress?.Invoke(true);
         }
-        else if(Input.GetKeyUp(_sprintKey)){
+        else{
             OnSprintKeyPress?.Invoke(false);
         }
     }

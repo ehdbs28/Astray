@@ -96,7 +96,13 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     }
 
     private void SetSprint(bool value){
-        _isSprint = value;
+        if(value){
+            _isSprint = _inputVelocity.x == _controller.FrontDir;
+        }
+        else{
+            _isSprint = false;
+        }
+
         _animationModule.SetSprint(_isSprint);
     }
 

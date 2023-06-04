@@ -29,7 +29,6 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     private bool _isSprint = false;
     private bool _isGround = false;
     private bool _isJump = false;
-    private bool _canJump = false;
 
     private PlayerAnimationModule _animationModule => _controller.GetModule<PlayerAnimationModule>();
 
@@ -48,18 +47,19 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         inputModule.OnSprintKeyPress += SetSprint;
     }
 
+    public override void OnUpdateModule(){
+        _isGround = _charController.isGrounded;
+    }
+
     public override void OnFixedUpdateModule()
     {
         CalcPlayerMovement();
         CaclJumpVelocity();
 
-        _isGround = _charController.isGrounded;
-
         if(_isGround == false){
             _verticalVelocity = _jumpVelocity * Time.fixedDeltaTime;
         }
         else{
-            _canJump = true;
             _verticalVelocity = _jumpVelocity * 0.3f * Time.fixedDeltaTime;
         }   
 
@@ -86,10 +86,9 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     }
         
     private void SetJump(){
-        if(_canJump == false)
+        if(_isGround == false)
             return;
 
-        _canJump = true;
         _isJump = true;
         _jumpVelocity = _jumpPower;
         _animationModule.SetJump(_isJump);
@@ -131,6 +130,5 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         _animationModule?.SetSpeed(0f);
     }
 
-    public override void OnUpdateModule(){}
     public override void OnDestroyModule(){}
 }

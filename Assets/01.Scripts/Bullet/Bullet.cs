@@ -38,6 +38,8 @@ public class Bullet : PoolableMono
         StopCoroutine("DestroyCoroutine");
         _lineRenderer.enabled = false;
 
+        PlayHitParticle(other);
+
         if(other.collider.CompareTag("Living")){
             HitLivingCreature(other);
         }
@@ -79,6 +81,18 @@ public class Bullet : PoolableMono
 
     private void HitObstacle(Collision other){
 
+    }
+
+    private void PlayHitParticle(Collision other){
+        Vector3 point = other.contacts[0].point;
+        Vector3 normal = _dir * -1f;
+        PoolableParticle spark = PoolManager.Instance.Pop("Spark") as PoolableParticle;
+        spark.SetPositionAndRotation(point, normal);
+        spark.Play();
+
+        PoolableParticle smoke = PoolManager.Instance.Pop("Smoke") as PoolableParticle;
+        smoke.SetPositionAndRotation(point, normal);
+        smoke.Play();
     }
 
     private IEnumerator DestroyCoroutine(){

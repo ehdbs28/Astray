@@ -7,6 +7,9 @@ public class Bullet : PoolableMono
     private LivingType _targetType;
 
     private Rigidbody _rigid;
+    private LineRenderer _lineRenderer;
+
+    private Transform _lineStartPos;
 
     private Vector3 _dir;
     private float _speed;
@@ -16,6 +19,15 @@ public class Bullet : PoolableMono
 
     private void Awake() {
         _rigid = GetComponent<Rigidbody>();
+        _lineRenderer = GetComponent<LineRenderer>();
+
+        _lineStartPos = transform.Find("LineStartPos");
+
+        _lineRenderer.enabled = false;
+    }
+
+    private void Update() {
+        DrawLine();
     }
 
     private void FixedUpdate() {
@@ -24,10 +36,16 @@ public class Bullet : PoolableMono
 
     private void OnCollisionEnter(Collision other) {
         StopCoroutine("DestroyCoroutine");
+        _lineRenderer.enabled = false;
 
         if(other.collider.CompareTag("Living")){
             HitLivingCreature(other);
         }
+        else if(other.collider.CompareTag("Obstacle")){
+            HitObstacle(other);
+        }
+
+        PoolManager.Instance.Push(this);
     }
 
     public void Setting(LivingType targetType, Vector3 dir, float speed, float damage){
@@ -36,11 +54,18 @@ public class Bullet : PoolableMono
         _speed = speed;
         _damage = damage;
 
+        _lineRenderer.enabled = true;
+
         StartCoroutine("DestroyCoroutine");
     }
 
     private void ShotBullet(){
         _rigid.velocity = _dir * _speed * Time.fixedDeltaTime;
+    }
+
+    private void DrawLine(){
+        _lineRenderer.SetPosition(0, _lineStartPos.position);
+        _lineRenderer.SetPosition(1, _lineStartPos.position + _dir * -1f);
     }
 
     private void HitLivingCreature(Collision other){
@@ -50,6 +75,10 @@ public class Bullet : PoolableMono
 
             damageable.OnDamage(_damage, point, normal);
         }
+    }
+
+    private void HitObstacle(Collision other){
+
     }
 
     private IEnumerator DestroyCoroutine(){

@@ -21,7 +21,7 @@ public class WeaponInputModule : CommonModule<WeaponController>
     }
 
     private void UpdateAttackInput(){
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButton(0)){
             OnAttackKeyPress?.Invoke();
         }
     }

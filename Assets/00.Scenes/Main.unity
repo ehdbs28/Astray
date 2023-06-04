@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 953432012}
   - component: {fileID: 953432013}
   - component: {fileID: 953432014}
+  - component: {fileID: 953432015}
   m_Layer: 0
   m_Name: Modules
   m_TagString: Untagged
@@ -548,6 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpKey: 32
   _sprintKey: 304
+  _dodgeKey: 306
 --- !u!114 &953432014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +562,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e608dc073ce1938488d6928b66cc6f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &953432015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953432010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898006ac60e309d4cb8d030c9011526b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dodgeTime: 0.5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

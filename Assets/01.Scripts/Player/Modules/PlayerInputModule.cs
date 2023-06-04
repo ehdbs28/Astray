@@ -10,12 +10,16 @@ public class PlayerInputModule : CommonModule<PlayerController>
     public event Action OnJumpKeyPress = null;
     public event Action<bool> OnSprintKeyPress = null;
     public event Action<int> OnFrontDirCheck = null;
+    public event Action OnDodgeKeyPress = null;
 
     [SerializeField]
     private KeyCode _jumpKey;
 
     [SerializeField]
     private KeyCode _sprintKey;
+
+    [SerializeField]
+    private KeyCode _dodgeKey;
 
     private Vector3 _dirInput;
 
@@ -25,6 +29,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         UpdateJumpInput();
         UpdateSprintInput();
         UpdateFrontDir();
+        UpdateDodgeInput();
     }
 
     public override void OnDestroyModule()
@@ -33,11 +38,18 @@ public class PlayerInputModule : CommonModule<PlayerController>
         OnJumpKeyPress = null;
         OnSprintKeyPress = null;
         OnFrontDirCheck = null;
+        OnDodgeKeyPress = null;
     }
 
     private void UpdateJumpInput(){
         if(Input.GetKeyDown(_jumpKey)){
             OnJumpKeyPress?.Invoke();
+        }
+    }
+
+    private void UpdateDodgeInput(){
+        if(Input.GetKeyDown(_dodgeKey)){
+            OnDodgeKeyPress?.Invoke();
         }
     }
 

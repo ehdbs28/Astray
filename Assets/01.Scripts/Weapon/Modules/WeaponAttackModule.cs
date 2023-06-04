@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponAttackModule : CommonModule<WeaponController>
 {
@@ -24,6 +25,9 @@ public class WeaponAttackModule : CommonModule<WeaponController>
 
     private Vector3 _attackDir;
 
+    [SerializeField]
+    private UnityEvent OnAttackStartEvent;
+
     public override void OnEnterModule()
     {
         WeaponInputModule inputModule = _controller.GetModule<WeaponInputModule>();
@@ -45,6 +49,8 @@ public class WeaponAttackModule : CommonModule<WeaponController>
         if(_canAttack == true){
             _attackStartTime = Time.time;
             _canAttack = false;
+
+            OnAttackStartEvent?.Invoke();
 
             Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
             bullet.Setting(_targetType, _attackDir, _bulletSpeed, _damage);

@@ -19,10 +19,10 @@ public class PlayerIKController : MonoBehaviour
     [SerializeField]
     private HandIKTarget _leftDirTarget;
 
-    [SerializeField]
-    private Vector3 _lookAtPos;
-
     private HandIKTarget _currentHandIK = null;
+
+    private int _frontDir => _controller.GetModule<PlayerInputModule>().FrontDir;
+    private Vector3 _lookAtPos;
 
     public void Awake()
     {
@@ -30,12 +30,8 @@ public class PlayerIKController : MonoBehaviour
         _controller = transform.parent.GetComponent<PlayerController>();
     }
 
-    public void Start()
-    {
-        _controller.GetModule<PlayerInputModule>().OnFrontDirCheck += SetHandIK;
-    }
-
     private void Update() {
+        SetHandIK(_frontDir);
         _lookAtPos = _controller.LookAtDir + transform.position;
     }
 

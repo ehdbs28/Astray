@@ -9,9 +9,8 @@ public class PlayerInputModule : CommonModule<PlayerController>
     public event Action<Vector3> OnMovementKeyPress = null;
     public event Action OnJumpKeyPress = null;
     public event Action<bool> OnSprintKeyPress = null;
-    public event Action<int> OnFrontDirCheck = null;
     public event Action OnDodgeKeyPress = null;
-    public event Action<Vector3> OnLookAtDirCheck = null;
+    public event Action OnAttackKeyPress = null;
 
     [SerializeField]
     private KeyCode _jumpKey;
@@ -24,6 +23,16 @@ public class PlayerInputModule : CommonModule<PlayerController>
 
     private Vector3 _dirInput;
 
+    private int _frontDir;
+    private float _mouseAngle;
+    private Vector3 _unNormalizeDir;
+    private Vector3 _normalizeDir;
+
+    public int FrontDir => _frontDir;
+    public float MouseAngle => _mouseAngle;
+    public Vector3 UnNormalizeDir => _unNormalizeDir;
+    public Vector3 NormalizeDir => _normalizeDir;
+
     public override void OnUpdateModule()
     {
         UpdateMovementInput();
@@ -31,6 +40,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         UpdateSprintInput();
         UpdateFrontDir();
         UpdateDodgeInput();
+        UpdateAttackInput();
     }
 
     public override void OnExitModule()
@@ -38,9 +48,8 @@ public class PlayerInputModule : CommonModule<PlayerController>
         OnMovementKeyPress = null;
         OnJumpKeyPress = null;
         OnSprintKeyPress = null;
-        OnFrontDirCheck = null;
         OnDodgeKeyPress = null;
-        OnLookAtDirCheck = null;
+        OnAttackKeyPress = null;
     }
 
     private void UpdateJumpInput(){
@@ -52,6 +61,12 @@ public class PlayerInputModule : CommonModule<PlayerController>
     private void UpdateDodgeInput(){
         if(Input.GetKeyDown(_dodgeKey)){
             OnDodgeKeyPress?.Invoke();
+        }
+    }
+
+    private void UpdateAttackInput(){
+        if(Input.GetMouseButton(0)){
+            OnAttackKeyPress?.Invoke();
         }
     }
 
@@ -73,18 +88,29 @@ public class PlayerInputModule : CommonModule<PlayerController>
 
     private void UpdateFrontDir(){
         Vector3 screenMousePos = Input.mousePosition;
-        screenMousePos.z = Vector3.Distance(transform.position, MainCam.transform.position);
+        screenMousePos.z = Vector3.Distance(_controller.Weapon.transform.position, MainCam.transform.position);
         Vector3 worldMousePos = MainCam.ScreenToWorldPoint(screenMousePos);
 
-        Vector3 dir = worldMousePos - transform.position;
-        OnLookAtDirCheck?.Invoke(dir);
+        Vector3 dir = worldMousePos - _controller.Weapon.transform.position;
 
-        if(worldMousePos.x > transform.position.x){
-            OnFrontDirCheck?.Invoke(1);
+        _unNormalizeDir = dir;
+        _normalizeDir = dir.normalized;
+
+        if(worldMousePos.x > _controller.Weapon.transform.position.x){
+            _frontDir = 1;
         }
-        else if(worldMousePos.x < transform.position.x){
-            OnFrontDirCheck?.Invoke(-1);
+        else if(worldMousePos.x < _controller.Weapon.transform.position.x){
+            _frontDir = -1;
         }
+
+        float cos = Vector3.Dot(Vector3.right, _normalizeDir);
+        float theta = Mathf.Acos(cos) * Mathf.Rad2Deg;
+
+        if(worldMousePos.y <= _controller.Weapon.transform.position.y){
+            theta *= -1f;
+        }
+
+        _mouseAngle = theta;
     }
 
     public override void OnEnterModule(){}

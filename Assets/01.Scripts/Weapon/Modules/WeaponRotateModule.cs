@@ -4,22 +4,12 @@ using UnityEngine;
 
 public class WeaponRotateModule : CommonModule<WeaponController>
 {
-    private float _mouseAngle = 0f;
-
-    public override void OnEnterModule(){
-        WeaponInputModule inputModule = _controller.GetModule<WeaponInputModule>();
-
-        inputModule.OnMouseAngleCheck += SetMouseAngle;
+    public void SetWeaponRotate(float angle){
+        _controller.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public override void OnUpdateModule(){
-        _controller.transform.rotation = Quaternion.AngleAxis(_mouseAngle, Vector3.forward);
-    }
-
-    private void SetMouseAngle(float angle){
-        _mouseAngle = angle;
-    }
-
+    public override void OnEnterModule(){}
+    public override void OnUpdateModule(){}
     public override void OnFixedUpdateModule(){}
     public override void OnExitModule(){}
 }

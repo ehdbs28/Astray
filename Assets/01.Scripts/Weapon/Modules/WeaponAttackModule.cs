@@ -28,14 +28,6 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     [SerializeField]
     private UnityEvent OnAttackStartEvent;
 
-    public override void OnEnterModule()
-    {
-        WeaponInputModule inputModule = _controller.GetModule<WeaponInputModule>();
-
-        inputModule.OnAttackKeyPress += OnAttackHandle;
-        inputModule.OnAttackDirCheck += SetAttackDir;
-    }
-
     public override void OnUpdateModule()
     {
         if(_canAttack == false){
@@ -45,7 +37,7 @@ public class WeaponAttackModule : CommonModule<WeaponController>
         }
     }
 
-    private void OnAttackHandle(){
+    public void OnAttackHandle(){
         if(_canAttack == true){
             _attackStartTime = Time.time;
             _canAttack = false;
@@ -62,10 +54,11 @@ public class WeaponAttackModule : CommonModule<WeaponController>
         }
     }
 
-    private void SetAttackDir(Vector3 dir){
+    public void SetAttackDir(Vector3 dir){
         _attackDir = dir;
     }
 
+    public override void OnEnterModule(){}
     public override void OnFixedUpdateModule(){}
     public override void OnExitModule(){}
 }

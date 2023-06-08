@@ -8,26 +8,17 @@ public class PlayerController : ModuleController
     private Transform _playerVisualTrm;
     
     [SerializeField]
-    private Transform _weaponTrm;
+    private WeaponController _weapon;
+    public WeaponController Weapon => _weapon;
 
     [SerializeField]
     private LivingDataSO _dataSO;
     public LivingDataSO DataSO => _dataSO;
 
-    private int _frontDir = 1;
-    public int FrontDir {
-        get{
-            return _frontDir;
-        }
-        
-        set{
-            _frontDir = value;
-            RotatePlayerDir();
-        }
-    }
-
-    private Vector3 _lookAtDir;
-    public Vector3 LookAtDir => _lookAtDir;
+    public int FrontDir => GetModule<PlayerInputModule>().FrontDir;
+    public Vector3 LookAtDir => GetModule<PlayerInputModule>().UnNormalizeDir;
+    public float MouseAngle => GetModule<PlayerInputModule>().MouseAngle;
+    public Vector3 AttackDir => GetModule<PlayerInputModule>().NormalizeDir;
 
     private Coroutine _runningCoroutine = null;
 
@@ -35,19 +26,19 @@ public class PlayerController : ModuleController
     {
         base.Start();
 
-        GetModule<PlayerInputModule>().OnFrontDirCheck += SetFrontDir;
-        GetModule<PlayerInputModule>().OnLookAtDirCheck += SetLookAtDir;
+        GetModule<PlayerInputModule>().OnAttackKeyPress += _weapon.GetModule<WeaponAttackModule>().OnAttackHandle;
+    }
+
+    protected override void Update() {
+        base.Update();
+
+        SetFrontDir(FrontDir);
+        _weapon.GetModule<WeaponAttackModule>().SetAttackDir(AttackDir);
+        _weapon.GetModule<WeaponRotateModule>().SetWeaponRotate(MouseAngle);
     }
 
     private void SetFrontDir(int value){
-        if(value == _frontDir)
-            return;
-
-        FrontDir = value;
-    }
-
-    private void SetLookAtDir(Vector3 value){
-        _lookAtDir = value;
+        RotatePlayerDir();
     }
 
     private void RotatePlayerDir(){
@@ -56,16 +47,16 @@ public class PlayerController : ModuleController
 
         _runningCoroutine = StartCoroutine(PlayerRotate());
         
-        Vector3 weaponScale = _weaponTrm.localScale;
-        weaponScale.y = 0.05524083f * _frontDir;
+        Vector3 weaponScale = _weapon.transform.localScale;
+        weaponScale.y = 0.05524083f * FrontDir;
 
-        _weaponTrm.localScale = weaponScale;
+        _weapon.transform.localScale = weaponScale;
     }
 
     private IEnumerator PlayerRotate(){
         float percent = 0f;
         float startAngle = _playerVisualTrm.rotation.eulerAngles.y;
-        float endAngle = (_frontDir > 0 ? 120f : 300f);
+        float endAngle = (FrontDir > 0 ? 120f : 300f);
 
         while(percent <= 1f){
             percent += Time.deltaTime * _dataSO.RotateSpeed;

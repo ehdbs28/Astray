@@ -8,10 +8,10 @@ public abstract class AIDecision : MonoBehaviour
     private bool _isReverse;
     public bool IsReverse => _isReverse;
 
-    protected ModuleController _controller;
+    protected EnemyController _controller;
 
     public virtual void SetUp(Transform root){
-        _controller = root.GetComponent<ModuleController>();
+        _controller = root.GetComponent<EnemyController>();
     }
 
     public abstract bool MakeADecision();

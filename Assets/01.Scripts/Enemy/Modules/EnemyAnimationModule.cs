@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimationModule : MonoBehaviour
+public class EnemyAnimationModule : CommonModule<EnemyController>
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly int _speedHash = Animator.StringToHash("speed");
+
+    private Animator _animator;
+
+    public override void SetUp(Transform agentRoot)
     {
-        
+        base.SetUp(agentRoot);
+
+        _animator = agentRoot.Find("Visual").GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetSpeed(float speed){
+        _animator.SetFloat(_speedHash, speed);
     }
+
+    public override void OnEnterModule(){}
+    public override void OnExitModule(){}
+    public override void OnUpdateModule(){}
+    public override void OnFixedUpdateModule(){}
 }

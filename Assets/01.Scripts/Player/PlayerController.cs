@@ -26,6 +26,9 @@ public class PlayerController : ModuleController
         }
     }
 
+    private Vector3 _lookAtDir;
+    public Vector3 LookAtDir => _lookAtDir;
+
     private Coroutine _runningCoroutine = null;
 
     protected override void Start()
@@ -33,6 +36,7 @@ public class PlayerController : ModuleController
         base.Start();
 
         GetModule<PlayerInputModule>().OnFrontDirCheck += SetFrontDir;
+        GetModule<PlayerInputModule>().OnLookAtDirCheck += SetLookAtDir;
     }
 
     private void SetFrontDir(int value){
@@ -40,6 +44,10 @@ public class PlayerController : ModuleController
             return;
 
         FrontDir = value;
+    }
+
+    private void SetLookAtDir(Vector3 value){
+        _lookAtDir = value;
     }
 
     private void RotatePlayerDir(){

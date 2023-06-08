@@ -2044,3 +2044,4 @@ MonoBehaviour:
   _leftDirTarget:
     RightHandTarget: {fileID: 1260140904}
     LeftHandTarget: {fileID: 1245013415}
+  _lookAtPos: {x: 0, y: 0, z: 0}

@@ -11,6 +11,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
     public event Action<bool> OnSprintKeyPress = null;
     public event Action<int> OnFrontDirCheck = null;
     public event Action OnDodgeKeyPress = null;
+    public event Action<Vector3> OnLookAtDirCheck = null;
 
     [SerializeField]
     private KeyCode _jumpKey;
@@ -39,6 +40,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         OnSprintKeyPress = null;
         OnFrontDirCheck = null;
         OnDodgeKeyPress = null;
+        OnLookAtDirCheck = null;
     }
 
     private void UpdateJumpInput(){
@@ -73,6 +75,9 @@ public class PlayerInputModule : CommonModule<PlayerController>
         Vector3 screenMousePos = Input.mousePosition;
         screenMousePos.z = Vector3.Distance(transform.position, MainCam.transform.position);
         Vector3 worldMousePos = MainCam.ScreenToWorldPoint(screenMousePos);
+
+        Vector3 dir = worldMousePos - transform.position;
+        OnLookAtDirCheck?.Invoke(dir);
 
         if(worldMousePos.x > transform.position.x){
             OnFrontDirCheck?.Invoke(1);

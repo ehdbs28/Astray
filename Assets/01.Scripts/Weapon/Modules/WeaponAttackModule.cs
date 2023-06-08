@@ -67,5 +67,5 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     }
 
     public override void OnFixedUpdateModule(){}
-    public override void OnDestroyModule(){}
+    public override void OnExitModule(){}
 }

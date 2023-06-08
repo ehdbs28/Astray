@@ -119,5 +119,5 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         _animationModule?.SetSpeed(0f);
     }
 
-    public override void OnDestroyModule(){}
+    public override void OnExitModule(){}
 }

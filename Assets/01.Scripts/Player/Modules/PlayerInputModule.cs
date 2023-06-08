@@ -32,7 +32,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         UpdateDodgeInput();
     }
 
-    public override void OnDestroyModule()
+    public override void OnExitModule()
     {
         OnMovementKeyPress = null;
         OnJumpKeyPress = null;

@@ -6,5 +6,5 @@ public interface IModule
     public void OnEnterModule();
     public void OnUpdateModule();
     public void OnFixedUpdateModule();
-    public void OnDestroyModule();
+    public void OnExitModule();
 }

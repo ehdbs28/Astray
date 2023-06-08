@@ -15,7 +15,7 @@ public class WeaponInputModule : CommonModule<WeaponController>
         UpdateAttackInput();
     }
 
-    public override void OnDestroyModule(){
+    public override void OnExitModule(){
         OnMouseAngleCheck = null;
         OnAttackKeyPress = null;
     }

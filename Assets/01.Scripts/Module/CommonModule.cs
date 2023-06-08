@@ -12,11 +12,11 @@ public abstract class CommonModule<T> : MonoBehaviour, IModule where T : ModuleC
     }
 
     private void OnDisable() {
-        OnDestroyModule();
+        OnExitModule();
     }
 
     public abstract void OnEnterModule();
     public abstract void OnUpdateModule();
     public abstract void OnFixedUpdateModule();
-    public abstract void OnDestroyModule();
+    public abstract void OnExitModule();
 }

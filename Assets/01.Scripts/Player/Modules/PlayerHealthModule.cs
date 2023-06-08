@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealthModule : CommonModule<PlayerController>
 {
-    public override void OnDestroyModule()
+    public override void OnExitModule()
     {
     }
 

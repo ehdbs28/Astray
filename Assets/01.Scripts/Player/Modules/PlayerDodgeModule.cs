@@ -31,5 +31,5 @@ public class PlayerDodgeModule : CommonModule<PlayerController>
     
     public override void OnUpdateModule(){}
     public override void OnFixedUpdateModule(){}
-    public override void OnDestroyModule(){}
+    public override void OnExitModule(){}
 }

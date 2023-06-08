@@ -21,5 +21,5 @@ public class WeaponRotateModule : CommonModule<WeaponController>
     }
 
     public override void OnFixedUpdateModule(){}
-    public override void OnDestroyModule(){}
+    public override void OnExitModule(){}
 }

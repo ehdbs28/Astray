@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b1d32e9a743db7458da7eaa819fb2de, type: 3}
-  m_Name: PlayerData
+  m_Name: EnemyData
   m_EditorClassIdentifier: 
   RotateSpeed: 10
   Gravity: -9.8
-  MoveSpeed: 3
-  SprintSpeed: 7
-  JumpPower: 3
+  MoveSpeed: 1
+  SprintSpeed: 5
+  JumpPower: 5
   MaxHP: 100

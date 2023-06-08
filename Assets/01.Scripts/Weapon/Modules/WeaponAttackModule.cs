@@ -43,6 +43,7 @@ public class WeaponAttackModule : CommonModule<WeaponController>
             _canAttack = false;
 
             OnAttackStartEvent?.Invoke();
+            StartCoroutine(GunReaction());
 
             Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
             bullet.Setting(_targetType, _attackDir, _bulletSpeed, _damage);
@@ -56,6 +57,12 @@ public class WeaponAttackModule : CommonModule<WeaponController>
 
     public void SetAttackDir(Vector3 dir){
         _attackDir = dir;
+    }
+
+    private IEnumerator GunReaction(){
+        _controller.transform.position += _attackDir * 0.03f * -1f;
+        yield return new WaitForSeconds(_attackDelay / 2);
+        _controller.transform.position -= _attackDir * 0.03f * -1f;
     }
 
     public override void OnEnterModule(){}

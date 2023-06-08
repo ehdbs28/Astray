@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetType: 2
   _firePos: {fileID: 1572421678}
-  _attackDelay: 0.2
+  _attackDelay: 0.15
   _bulletSpeed: 1000
   _damage: 3
   OnAttackStartEvent:

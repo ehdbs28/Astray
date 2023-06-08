@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class PlayerMovementModule : CommonModule<PlayerController>
 {
-    [SerializeField]
-    private float _gravity = -9.8f;
-
-    [SerializeField]
-    private float _moveSpeed;
-
-    [SerializeField]
-    private float _sprintSpeed;
-
-    [SerializeField]
-    private float _jumpPower;
-
     private CharacterController _charController;
 
     private Vector3 _movementVelocity;
@@ -71,7 +59,7 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     private void CaclJumpVelocity()
     {
         if(_isJump){
-            _jumpVelocity += Time.fixedDeltaTime * _gravity;
+            _jumpVelocity += Time.fixedDeltaTime * _controller.DataSO.Gravity;
             
             if(_jumpVelocity <= 0f){
                 _jumpVelocity = 0;
@@ -80,8 +68,8 @@ public class PlayerMovementModule : CommonModule<PlayerController>
             }
         }
         else {
-            _jumpVelocity += _gravity * Time.fixedDeltaTime;
-            _jumpVelocity = Mathf.Clamp(_jumpVelocity, _gravity, 0);
+            _jumpVelocity += _controller.DataSO.Gravity * Time.fixedDeltaTime;
+            _jumpVelocity = Mathf.Clamp(_jumpVelocity, _controller.DataSO.Gravity, 0);
         }
     }
         
@@ -90,19 +78,20 @@ public class PlayerMovementModule : CommonModule<PlayerController>
             return;
 
         _isJump = true;
-        _jumpVelocity = _jumpPower;
+        _jumpVelocity = _controller.DataSO.JumpPower;
         _animationModule.SetJump(_isJump);
     }
 
     private void SetSprint(bool value){
-        if(value){
-            _isSprint = _inputVelocity.x == _controller.FrontDir;
+        if(_isGround){
+            if(value){
+                _isSprint = _inputVelocity.x == _controller.FrontDir;
+            }
+            else{
+                _isSprint = false;
+            }
+            _animationModule.SetSprint(_isSprint);
         }
-        else{
-            _isSprint = false;
-        }
-
-        _animationModule.SetSprint(_isSprint);
     }
 
     private void SetMovementVelocity(Vector3 value){
@@ -118,10 +107,10 @@ public class PlayerMovementModule : CommonModule<PlayerController>
         _animationModule?.SetSpeed(_inputVelocity.sqrMagnitude);
 
         if(_isSprint == false){
-            _movementVelocity *= _moveSpeed * Time.fixedDeltaTime;
+            _movementVelocity *= _controller.DataSO.MoveSpeed * Time.fixedDeltaTime;
         }
         else{
-            _movementVelocity *= _sprintSpeed * Time.fixedDeltaTime;
+            _movementVelocity *= _controller.DataSO.SprintSpeed * Time.fixedDeltaTime;
         }
     }
 

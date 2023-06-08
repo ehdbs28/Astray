@@ -11,7 +11,8 @@ public class PlayerController : ModuleController
     private Transform _weaponTrm;
 
     [SerializeField]
-    private float _rotateSpeed;
+    private LivingDataSO _dataSO;
+    public LivingDataSO DataSO => _dataSO;
 
     private int _frontDir = 1;
     public int FrontDir {
@@ -59,7 +60,7 @@ public class PlayerController : ModuleController
         float endAngle = (_frontDir > 0 ? 120f : 300f);
 
         while(percent <= 1f){
-            percent += Time.deltaTime * _rotateSpeed;
+            percent += Time.deltaTime * _dataSO.RotateSpeed;
             float angle = Mathf.Lerp(startAngle, endAngle, percent);
             _playerVisualTrm.rotation = Quaternion.AngleAxis(angle, Vector3.up);
             yield return null;

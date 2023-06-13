@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class WeaponAttackModule : CommonModule<WeaponController>
 {
@@ -21,12 +20,10 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     private float _damage;
 
     private bool _canAttack = false;
+
     private float _attackStartTime;
 
     private Vector3 _attackDir;
-
-    [SerializeField]
-    private UnityEvent OnAttackStartEvent;
 
     public override void OnUpdateModule()
     {
@@ -42,16 +39,18 @@ public class WeaponAttackModule : CommonModule<WeaponController>
             _attackStartTime = Time.time;
             _canAttack = false;
 
-            OnAttackStartEvent?.Invoke();
             StartCoroutine(GunReaction());
-
-            Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
-            bullet.Setting(_targetType, _attackDir, _bulletSpeed, _damage);
 
             Vector3 firePos = _firePos.position;
             firePos.z = 0f;
-            bullet.transform.position = firePos;
-            bullet.transform.rotation = Quaternion.LookRotation(_attackDir);
+
+            Bullet bullet = PoolManager.Instance.Pop("Bullet") as Bullet;
+            bullet.Setting(_targetType, _attackDir, _bulletSpeed, _damage);
+            bullet.transform.SetPositionAndRotation(firePos, Quaternion.LookRotation(_attackDir));
+
+            PoolableParticle muzzle = PoolManager.Instance.Pop("MuzzleFlashParticle") as PoolableParticle;
+            muzzle.SetPositionAndRotation(firePos, Quaternion.LookRotation(_attackDir));
+            muzzle.Play();
         }
     }
 

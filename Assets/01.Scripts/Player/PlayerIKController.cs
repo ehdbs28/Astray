@@ -11,7 +11,10 @@ public class HandIKTarget{
 public class PlayerIKController : MonoBehaviour
 {
     private Animator _animator;
-    private PlayerController _controller;
+
+    [SerializeField]
+    private Transform _head;
+    public Transform Head => _head;
 
     [SerializeField]
     private HandIKTarget _rightDirTarget;
@@ -21,18 +24,14 @@ public class PlayerIKController : MonoBehaviour
 
     private HandIKTarget _currentHandIK = null;
 
-    private int _frontDir => _controller.GetModule<PlayerInputModule>().FrontDir;
-    private Vector3 _lookAtPos;
+    private Vector3 _lookPos;
 
-    public void Awake()
-    {
+    public void Awake(){
         _animator = transform.GetComponent<Animator>();
-        _controller = transform.parent.GetComponent<PlayerController>();
     }
 
-    private void Update() {
-        SetHandIK(_frontDir);
-        _lookAtPos = _controller.LookAtDir + transform.position;
+    public void SetLookPos(Vector3 lookPos){
+        _lookPos = lookPos;
     }
 
     private void OnAnimatorIK(int layerIndex) {
@@ -45,7 +44,7 @@ public class PlayerIKController : MonoBehaviour
         _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
 
         _animator.SetLookAtWeight(1);
-        _animator.SetLookAtPosition(_lookAtPos);
+        _animator.SetLookAtPosition(_lookPos);
         
         if(_currentHandIK != null){
             _animator.SetIKPosition(AvatarIKGoal.RightHand, _currentHandIK.RightHandTarget.position);
@@ -56,7 +55,7 @@ public class PlayerIKController : MonoBehaviour
         }
     }
 
-    private void SetHandIK(int value){
+    public void SetHandIK(int value){
         _currentHandIK = (value > 0 ? _rightDirTarget : _leftDirTarget);
     }
 }

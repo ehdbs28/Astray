@@ -5,14 +5,19 @@ using UnityEngine;
 public class PoolableParticle : PoolableMono
 {
     private ParticleSystem _particleSystem;
+    private float _waitTime;
 
     private void Awake() {
         _particleSystem = GetComponent<ParticleSystem>();
+        _waitTime = _particleSystem.main.duration + 0.1f;
     }
 
     public void SetPositionAndRotation(Vector3 point, Vector3 normal){
-        transform.position = point;
-        transform.rotation = Quaternion.LookRotation(normal);
+        transform.SetLocalPositionAndRotation(point, Quaternion.LookRotation(normal));
+    }
+
+    public void SetPositionAndRotation(Vector3 pos, Quaternion rot){
+        transform.SetPositionAndRotation(pos, rot);
     }
 
     public void Play(){
@@ -21,7 +26,7 @@ public class PoolableParticle : PoolableMono
 
     private IEnumerator PlayCallBack(){
         _particleSystem.Play();
-        yield return new WaitUntil(() => _particleSystem.isPlaying == false);
+        yield return new WaitForSeconds(_waitTime);
         PoolManager.Instance.Push(this);
     }
 

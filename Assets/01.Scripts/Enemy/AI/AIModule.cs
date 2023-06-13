@@ -18,7 +18,7 @@ public abstract class AIModule : CommonModule<EnemyController>
         foreach(var t in _transitions){
             if(t.CheckDecision()){
                 _controller.ChangedState(t.NextModule);
-                break;
+                return;
             }
         }
     }

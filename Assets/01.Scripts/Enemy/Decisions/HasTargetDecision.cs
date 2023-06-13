@@ -6,6 +6,6 @@ public class HasTargetDecision : AIDecision
 {
     public override bool MakeADecision()
     {
-        return _controller.ActionData.TargetSpotted && _controller.ActionData.Target != null;
+        return _controller.ActionData.Player;
     }
 }

@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class EnemyActionData : MonoBehaviour
 {
-    public bool TargetSpotted;
-    public Transform Target;
+    public PlayerController Player;
 }

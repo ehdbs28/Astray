@@ -9,14 +9,14 @@ public class EnemyChaseModule : AIModule
     }
 
     public override void OnExitModule(){
+        _controller.GetModule<EnemyNavModule>().StopImmediately();
         _controller.GetModule<EnemyAnimationModule>().SetSpeed(0f);
     }
 
     public override void OnUpdateModule()
     {
+        _controller.GetModule<EnemyNavModule>().MoveToTarget(_controller.ActionData.Player.transform.position);
         base.OnUpdateModule();
-
-        _controller.GetModule<EnemyNavModule>().MoveToTarget(_controller.ActionData.Target.position);
     }
 
     public override void OnFixedUpdateModule(){}

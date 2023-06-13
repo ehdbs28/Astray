@@ -1,102 +1,284 @@
 fileFormatVersion: 2
 guid: e1cf6ff5b3e50ea4482b0d56df666c91
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: DOOM Assault
-    100004: Doom Assualt
-    100006: Head
-    100008: Head_end
-    100010: Hips
-    100012: Left Arm
-    100014: Left Elbow
-    100016: Left Foot
-    100018: Left Hand
-    100020: Left Hand End
-    100022: Left Hand End_end
-    100024: Left Hand Middle
-    100026: Left Hips
-    100028: Left Knee
-    100030: Left Shoulder
-    100032: Left Thumb
-    100034: Left Thumb_end
-    100036: Left Toe
-    100038: Left Toe_end
-    100040: Neck
-    100042: Right Arm
-    100044: Right Elbow
-    100046: Right Foot
-    100048: Right Hand
-    100050: Right Hand End
-    100052: Right Hand End_end
-    100054: Right Hand Middle
-    100056: Right Hips
-    100058: Right Knee
-    100060: Right Shoulder
-    100062: Right Thumb
-    100064: Right Thumb_end
-    100066: Right Toe
-    100068: Right Toe_end
-    100070: Spine 1
-    100072: Spine 2
-    100074: Spine 3
-    100076: Assault
-    100078: Assault Mesh
-    400000: //RootNode
-    400002: DOOM Assault
-    400004: Doom Assualt
-    400006: Head
-    400008: Head_end
-    400010: Hips
-    400012: Left Arm
-    400014: Left Elbow
-    400016: Left Foot
-    400018: Left Hand
-    400020: Left Hand End
-    400022: Left Hand End_end
-    400024: Left Hand Middle
-    400026: Left Hips
-    400028: Left Knee
-    400030: Left Shoulder
-    400032: Left Thumb
-    400034: Left Thumb_end
-    400036: Left Toe
-    400038: Left Toe_end
-    400040: Neck
-    400042: Right Arm
-    400044: Right Elbow
-    400046: Right Foot
-    400048: Right Hand
-    400050: Right Hand End
-    400052: Right Hand End_end
-    400054: Right Hand Middle
-    400056: Right Hips
-    400058: Right Knee
-    400060: Right Shoulder
-    400062: Right Thumb
-    400064: Right Thumb_end
-    400066: Right Toe
-    400068: Right Toe_end
-    400070: Spine 1
-    400072: Spine 2
-    400074: Spine 3
-    400076: Assault
-    400078: Assault Mesh
-    2100000: Material.001
-    2100002: Machine
-    2100004: Visor
-    2100006: Armor
-    2100008: GLoves
-    4300000: Doom Assualt
-    4300002: Assault Mesh
-    9500000: //RootNode
-    13700000: Doom Assualt
-    13700002: Assault Mesh
-    2186277476908879412: ImportLogs
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: DOOM Assault
+  - first:
+      1: 100004
+    second: Doom Assualt
+  - first:
+      1: 100006
+    second: Head
+  - first:
+      1: 100008
+    second: Head_end
+  - first:
+      1: 100010
+    second: Hips
+  - first:
+      1: 100012
+    second: Left Arm
+  - first:
+      1: 100014
+    second: Left Elbow
+  - first:
+      1: 100016
+    second: Left Foot
+  - first:
+      1: 100018
+    second: Left Hand
+  - first:
+      1: 100020
+    second: Left Hand End
+  - first:
+      1: 100022
+    second: Left Hand End_end
+  - first:
+      1: 100024
+    second: Left Hand Middle
+  - first:
+      1: 100026
+    second: Left Hips
+  - first:
+      1: 100028
+    second: Left Knee
+  - first:
+      1: 100030
+    second: Left Shoulder
+  - first:
+      1: 100032
+    second: Left Thumb
+  - first:
+      1: 100034
+    second: Left Thumb_end
+  - first:
+      1: 100036
+    second: Left Toe
+  - first:
+      1: 100038
+    second: Left Toe_end
+  - first:
+      1: 100040
+    second: Neck
+  - first:
+      1: 100042
+    second: Right Arm
+  - first:
+      1: 100044
+    second: Right Elbow
+  - first:
+      1: 100046
+    second: Right Foot
+  - first:
+      1: 100048
+    second: Right Hand
+  - first:
+      1: 100050
+    second: Right Hand End
+  - first:
+      1: 100052
+    second: Right Hand End_end
+  - first:
+      1: 100054
+    second: Right Hand Middle
+  - first:
+      1: 100056
+    second: Right Hips
+  - first:
+      1: 100058
+    second: Right Knee
+  - first:
+      1: 100060
+    second: Right Shoulder
+  - first:
+      1: 100062
+    second: Right Thumb
+  - first:
+      1: 100064
+    second: Right Thumb_end
+  - first:
+      1: 100066
+    second: Right Toe
+  - first:
+      1: 100068
+    second: Right Toe_end
+  - first:
+      1: 100070
+    second: Spine 1
+  - first:
+      1: 100072
+    second: Spine 2
+  - first:
+      1: 100074
+    second: Spine 3
+  - first:
+      1: 100076
+    second: Assault
+  - first:
+      1: 100078
+    second: Assault Mesh
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: DOOM Assault
+  - first:
+      4: 400004
+    second: Doom Assualt
+  - first:
+      4: 400006
+    second: Head
+  - first:
+      4: 400008
+    second: Head_end
+  - first:
+      4: 400010
+    second: Hips
+  - first:
+      4: 400012
+    second: Left Arm
+  - first:
+      4: 400014
+    second: Left Elbow
+  - first:
+      4: 400016
+    second: Left Foot
+  - first:
+      4: 400018
+    second: Left Hand
+  - first:
+      4: 400020
+    second: Left Hand End
+  - first:
+      4: 400022
+    second: Left Hand End_end
+  - first:
+      4: 400024
+    second: Left Hand Middle
+  - first:
+      4: 400026
+    second: Left Hips
+  - first:
+      4: 400028
+    second: Left Knee
+  - first:
+      4: 400030
+    second: Left Shoulder
+  - first:
+      4: 400032
+    second: Left Thumb
+  - first:
+      4: 400034
+    second: Left Thumb_end
+  - first:
+      4: 400036
+    second: Left Toe
+  - first:
+      4: 400038
+    second: Left Toe_end
+  - first:
+      4: 400040
+    second: Neck
+  - first:
+      4: 400042
+    second: Right Arm
+  - first:
+      4: 400044
+    second: Right Elbow
+  - first:
+      4: 400046
+    second: Right Foot
+  - first:
+      4: 400048
+    second: Right Hand
+  - first:
+      4: 400050
+    second: Right Hand End
+  - first:
+      4: 400052
+    second: Right Hand End_end
+  - first:
+      4: 400054
+    second: Right Hand Middle
+  - first:
+      4: 400056
+    second: Right Hips
+  - first:
+      4: 400058
+    second: Right Knee
+  - first:
+      4: 400060
+    second: Right Shoulder
+  - first:
+      4: 400062
+    second: Right Thumb
+  - first:
+      4: 400064
+    second: Right Thumb_end
+  - first:
+      4: 400066
+    second: Right Toe
+  - first:
+      4: 400068
+    second: Right Toe_end
+  - first:
+      4: 400070
+    second: Spine 1
+  - first:
+      4: 400072
+    second: Spine 2
+  - first:
+      4: 400074
+    second: Spine 3
+  - first:
+      4: 400076
+    second: Assault
+  - first:
+      4: 400078
+    second: Assault Mesh
+  - first:
+      21: 2100000
+    second: Material.001
+  - first:
+      21: 2100002
+    second: Machine
+  - first:
+      21: 2100004
+    second: Visor
+  - first:
+      21: 2100006
+    second: Armor
+  - first:
+      21: 2100008
+    second: GLoves
+  - first:
+      43: 4300000
+    second: Doom Assualt
+  - first:
+      43: 4300002
+    second: Assault Mesh
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Doom Assualt
+  - first:
+      137: 13700002
+    second: Assault Mesh
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -105,6 +287,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -129,25 +312,34 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -156,10 +348,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Hips
       humanName: Hips
@@ -323,6 +515,14 @@ ModelImporter:
         modified: 0
     - boneName: Spine 3
       humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Right Toe
+      humanName: RightToes
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -527,13 +727,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

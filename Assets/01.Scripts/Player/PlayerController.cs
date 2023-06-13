@@ -15,12 +15,22 @@ public class PlayerController : ModuleController
     private LivingDataSO _dataSO;
     public LivingDataSO DataSO => _dataSO;
 
+    private PlayerIKController _ikController;
+    public PlayerIKController IkController => _ikController;
+
     public int FrontDir => GetModule<PlayerInputModule>().FrontDir;
-    public Vector3 LookAtDir => GetModule<PlayerInputModule>().UnNormalizeDir;
+    public Vector3 LookDir => GetModule<PlayerInputModule>().UnNormalizeDir;
     public float MouseAngle => GetModule<PlayerInputModule>().MouseAngle;
     public Vector3 AttackDir => GetModule<PlayerInputModule>().NormalizeDir;
 
     private Coroutine _runningCoroutine = null;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _ikController = transform.Find("Visual").GetComponent<PlayerIKController>();
+    }
 
     protected override void Start()
     {
@@ -33,12 +43,14 @@ public class PlayerController : ModuleController
         base.Update();
 
         SetFrontDir(FrontDir);
+        _ikController.SetLookPos(LookDir + transform.position);
         _weapon.GetModule<WeaponAttackModule>().SetAttackDir(AttackDir);
         _weapon.GetModule<WeaponRotateModule>().SetWeaponRotate(MouseAngle);
     }
 
     private void SetFrontDir(int value){
         RotatePlayerDir();
+        _ikController.SetHandIK(value);
     }
 
     private void RotatePlayerDir(){

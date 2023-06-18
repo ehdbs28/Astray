@@ -10,5 +10,6 @@ public class LivingDataSO : ScriptableObject
     public float MoveSpeed;
     public float SprintSpeed;
     public float JumpPower;
+    public float WallJumpPower;
     public float MaxHP;
 }

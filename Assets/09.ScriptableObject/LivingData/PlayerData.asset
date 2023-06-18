@@ -15,6 +15,7 @@ MonoBehaviour:
   RotateSpeed: 10
   Gravity: -9.8
   MoveSpeed: 3
-  SprintSpeed: 7
-  JumpPower: 3
+  SprintSpeed: 5
+  JumpPower: 4
+  WallJumpPower: 6
   MaxHP: 100

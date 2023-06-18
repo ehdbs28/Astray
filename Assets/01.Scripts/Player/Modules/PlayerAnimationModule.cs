@@ -18,6 +18,9 @@ public class PlayerAnimationModule : CommonModule<PlayerController>
     private readonly int _dodgeTriggerHash = Animator.StringToHash("dodge");
     private readonly int _isDodgeHash = Animator.StringToHash("is_dodge");
 
+    private readonly int _backFlipTriggerHash = Animator.StringToHash("backflip");
+    private readonly int _isBackFliphash = Animator.StringToHash("is_backflip");
+
     private Animator _animator;
 
     public override void SetUp(Transform agentRoot)
@@ -42,6 +45,16 @@ public class PlayerAnimationModule : CommonModule<PlayerController>
         }   
         else{
             _animator.ResetTrigger(_jumpTriggerHash);
+        }
+    }
+
+    public void SetBackFlip(bool value){
+        _animator.SetBool(_isBackFliphash, value);
+        if(value){
+            _animator.SetTrigger(_backFlipTriggerHash);
+        }
+        else{
+            _animator.ResetTrigger(_backFlipTriggerHash);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerMovementModule : CommonModule<PlayerController>
 {
@@ -10,6 +11,7 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     public Vector3 MovementVelocity => _movementVelocity;
 
     private float _verticalVelocity;
+    [SerializeField]
     private float _jumpVelocity;
 
     private Vector3 _inputVelocity;
@@ -17,6 +19,22 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     private bool _isSprint = false;
     private bool _isGround = false;
     private bool _isJump = false;
+    private bool _isWallRun = false;
+    
+    [SerializeField]
+    private LayerMask _whatIsWall;
+
+    [SerializeField]
+    private Transform _leftRayPos, _rightRayPos;
+
+    [SerializeField]
+    private float _rayDis;
+
+    [SerializeField]
+    private Transform _rightFoot;
+
+    [SerializeField]
+    private Transform _leftFoot;
 
     private PlayerAnimationModule _animationModule => _controller.GetModule<PlayerAnimationModule>();
 
@@ -36,7 +54,11 @@ public class PlayerMovementModule : CommonModule<PlayerController>
     }
 
     public override void OnUpdateModule(){
+        if(_charController.isGrounded == false && _isGround == true && _isJump == false){
+            _jumpVelocity = _controller.DataSO.Gravity * Time.fixedDeltaTime;
+        }
         _isGround = _charController.isGrounded;
+        _isWallRun = IsWallCheck();
     }
 
     public override void OnFixedUpdateModule()
@@ -48,6 +70,7 @@ public class PlayerMovementModule : CommonModule<PlayerController>
             _verticalVelocity = _jumpVelocity * Time.fixedDeltaTime;
         }
         else{
+            _animationModule.SetBackFlip(false);    
             _verticalVelocity = _jumpVelocity * 0.3f * Time.fixedDeltaTime;
         }   
 
@@ -72,14 +95,31 @@ public class PlayerMovementModule : CommonModule<PlayerController>
             _jumpVelocity = Mathf.Clamp(_jumpVelocity, _controller.DataSO.Gravity, 0);
         }
     }
+
+    private bool IsWallCheck(){
+        Ray rightRay = new Ray(_rightRayPos.position, Vector3.right * _controller.FrontDir);
+        Ray leftRay = new Ray(_leftRayPos.position, Vector3.left * _controller.FrontDir);
+
+        bool isHitRight = Physics.Raycast(rightRay, _rayDis,_whatIsWall);
+        bool isHitLeft = Physics.Raycast(leftRay, _rayDis,_whatIsWall);
+
+        return (isHitRight || isHitLeft) && !_isGround;
+    }
         
     private void SetJump(){
-        if(_isGround == false)
+        if(_isGround == false && _isWallRun == false || _isJump)
             return;
 
         _isJump = true;
-        _jumpVelocity = _controller.DataSO.JumpPower;
-        _animationModule.SetJump(_isJump);
+
+        if(_isWallRun){
+            _jumpVelocity = _controller.DataSO.WallJumpPower;
+            _animationModule.SetBackFlip(_isJump);
+        }
+        else{
+            _jumpVelocity = _controller.DataSO.JumpPower * (_isSprint ? 1.25f : 1f);
+            _animationModule.SetJump(_isJump);
+        }
     }
 
     private void SetSprint(bool value){

@@ -77,8 +77,6 @@ public class Bullet : PoolableMono
                     return;
             }
 
-            Debug.Log(1);
-
             Vector3 point = other.contacts[0].point;
             Vector3 normal = other.contacts[0].normal;
 

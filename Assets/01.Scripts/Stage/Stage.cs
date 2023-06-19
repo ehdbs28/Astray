@@ -21,6 +21,10 @@ public class Stage : PoolableMono
         player.GetModule<PlayerMovementModule>().CharController.enabled = false;
         player.transform.position = _startPos.position;
         player.GetModule<PlayerMovementModule>().CharController.enabled = true;
+
+        PlayerFollowVCam playerVCam = CameraManager.Instance.SetVCam(CameraType.PlayerFollow) as PlayerFollowVCam;
+        playerVCam.SetTarget(player.transform);
+
         SpawnEnemy();
     }
 
@@ -30,7 +34,6 @@ public class Stage : PoolableMono
 
     public void SpawnEnemy(){
         foreach(Transform pos in _enemyPos){
-            Debug.Log(pos.position);
             EnemyController enemy = PoolManager.Instance.Pop("Enemy") as EnemyController;
             enemy.GetModule<EnemyNavModule>().CharController.enabled = false;
             enemy.GetModule<EnemyNavModule>().NavMeshAgent.enabled = false;

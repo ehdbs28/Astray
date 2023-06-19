@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
     
         CreatePool();
+        CreateCamera();
         CreateStageManager();
     }
 
@@ -40,5 +41,9 @@ public class GameManager : MonoBehaviour
 
     private void CreateStageManager(){
         StageManager.Instance = new StageManager();
+    }
+
+    private void CreateCamera(){
+        CameraManager.Instance = GetComponent<CameraManager>();
     }
 }

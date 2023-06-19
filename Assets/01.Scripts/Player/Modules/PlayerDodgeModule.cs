@@ -8,6 +8,7 @@ public class PlayerDodgeModule : CommonModule<PlayerController>
     private float _dodgeTime;
 
     private bool _isDodge;
+    public bool IsDodge => _isDodge;
 
     private PlayerAnimationModule _animationModule => _controller.GetModule<PlayerAnimationModule>();
 

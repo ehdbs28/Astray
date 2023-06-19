@@ -77,6 +77,15 @@ public class Bullet : PoolableMono
                     return;
             }
 
+            if(_targetType == LivingType.PLAYER){
+                PlayerController pCon = other.collider.GetComponent<PlayerController>();
+
+                if(pCon != null){
+                    if(pCon.GetModule<PlayerDodgeModule>().IsDodge)
+                        return;
+                }
+            }
+
             Vector3 point = other.contacts[0].point;
             Vector3 normal = other.contacts[0].normal;
 

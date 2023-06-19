@@ -72,6 +72,13 @@ public class Bullet : PoolableMono
 
     private void HitLivingCreature(Collision other){
         if(other.transform.TryGetComponent<IDamageable>(out IDamageable damageable)){
+            if((_targetType == LivingType.PLAYER && other.gameObject.name != "Player") ||
+                (_targetType == LivingType.ENEMY && other.gameObject.name != "Enemy")){
+                    return;
+            }
+
+            Debug.Log(1);
+
             Vector3 point = other.contacts[0].point;
             Vector3 normal = other.contacts[0].normal;
 

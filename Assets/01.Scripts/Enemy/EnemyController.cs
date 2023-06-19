@@ -19,6 +19,9 @@ public class EnemyController : ModuleController
     private LivingDataSO _dataSO;
     public LivingDataSO DataSO => _dataSO;
 
+    [SerializeField]
+    private float _destroyDelay = 5f;
+
     private EnemyActionData _actionData;
     public EnemyActionData ActionData => _actionData;
 
@@ -69,6 +72,11 @@ public class EnemyController : ModuleController
             StopCoroutine(_runningCoroutine);
 
         _runningCoroutine = StartCoroutine(Rotate());
+
+        Vector3 weaponScale = _weapon.transform.localScale;
+        weaponScale.y = 0.05524086f * _frontDir;
+
+        _weapon.transform.localScale = weaponScale;
     }
 
     private IEnumerator Rotate(){
@@ -91,5 +99,14 @@ public class EnemyController : ModuleController
         _currentModule?.OnExitModule();
         _currentModule = next;
         _currentModule.OnEnterModule();
+    }
+
+    public void OnDieHandle(){
+        StartCoroutine(OnDie());
+    }
+
+    private IEnumerator OnDie(){
+        yield return new WaitForSeconds(_destroyDelay);
+        PoolManager.Instance.Push(this);
     }
 }

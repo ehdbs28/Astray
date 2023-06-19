@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class EnemyNavModule : CommonModule<EnemyController>
 {
     private NavMeshAgent _navMeshAgent;
+    public NavMeshAgent NavMeshAgent => _navMeshAgent;
+
     private CharacterController _characterController;
+    public CharacterController CharController => _characterController;
 
     private Vector3 _movementVelocity;
 

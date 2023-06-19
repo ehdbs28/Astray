@@ -21,6 +21,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
     
         CreatePool();
+        CreateStageManager();
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.J)){
+            StageManager.Instance.SetStage();
+        }
     }
 
     private void CreatePool(){
@@ -29,5 +36,9 @@ public class GameManager : MonoBehaviour
         _poolingList.Pairs.ForEach(pair => {
             PoolManager.Instance.CreatePool(pair.Prefab, pair.Count);
         });
+    }
+
+    private void CreateStageManager(){
+        StageManager.Instance = new StageManager();
     }
 }

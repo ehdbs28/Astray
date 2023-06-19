@@ -6,6 +6,7 @@ using UnityEditor;
 public class PlayerMovementModule : CommonModule<PlayerController>
 {
     private CharacterController _charController;
+    public CharacterController CharController => _charController;
 
     private Vector3 _movementVelocity;
     public Vector3 MovementVelocity => _movementVelocity;

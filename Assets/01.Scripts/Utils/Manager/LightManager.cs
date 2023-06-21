@@ -10,7 +10,6 @@ public class LightManager : MonoBehaviour
 
     private void Awake() {
         _mainLight = transform.parent.Find("Directional Light").GetComponent<Light>();
-        Debug.Log(_mainLight);
     }
 
     public void Flash(float dest, float duration){

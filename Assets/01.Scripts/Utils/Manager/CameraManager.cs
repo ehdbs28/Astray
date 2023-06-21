@@ -19,6 +19,10 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    private void Update() {
+        _currentVCam?.UpdateVCam();
+    }
+
     public VCam SetVCam(CameraType next){
         VCam virtualCam = null;
         

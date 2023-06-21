@@ -103,6 +103,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         Vector3 worldMousePos = MainCam.ScreenToWorldPoint(screenMousePos);
 
         Vector3 dir = worldMousePos - _controller.Weapon.transform.position;
+        dir.z = 0;
 
         _unNormalizeDir = dir;
         _normalizeDir = dir.normalized;

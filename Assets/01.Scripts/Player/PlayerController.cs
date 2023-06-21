@@ -18,6 +18,9 @@ public class PlayerController : ModuleController
     private PlayerIKController _ikController;
     public PlayerIKController IkController => _ikController;
 
+    private HealthController _healthController;
+    public HealthController HealthController => _healthController;
+
     public int FrontDir => GetModule<PlayerInputModule>().FrontDir;
     public Vector3 LookDir => GetModule<PlayerInputModule>().UnNormalizeDir;
     public float MouseAngle => GetModule<PlayerInputModule>().MouseAngle;
@@ -30,6 +33,7 @@ public class PlayerController : ModuleController
         base.Awake();
 
         _ikController = transform.Find("Visual").GetComponent<PlayerIKController>();
+        _healthController = GetComponent<HealthController>();
     }
 
     protected override void Start()
@@ -37,6 +41,7 @@ public class PlayerController : ModuleController
         base.Start();
 
         GetModule<PlayerInputModule>().OnAttackKeyPress += _weapon.GetModule<WeaponAttackModule>().OnAttackHandle;
+        GetModule<PlayerInputModule>().OnReloadKeyPress += _weapon.GetModule<WeaponAttackModule>().Reloading;
     }
 
     protected override void Update() {
@@ -46,6 +51,13 @@ public class PlayerController : ModuleController
         _ikController.SetLookPos(LookDir + transform.position);
         _weapon.GetModule<WeaponAttackModule>().SetAttackDir(AttackDir);
         _weapon.GetModule<WeaponRotateModule>().SetWeaponRotate(MouseAngle);
+    }
+
+    public override void Init()
+    {
+        _healthController.LayerDead(true);
+        _weapon.gameObject.SetActive(true);
+        _healthController.Init();
     }
 
     private void SetFrontDir(int value){

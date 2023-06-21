@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class HealthController : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent OnDieEvent;
 
+    public Action<float, float> OnDamageEvent = null;
+
     private void Awake() {
         _mainController = GetComponent<ModuleController>();
         _characterController = GetComponent<CharacterController>();
@@ -38,13 +41,16 @@ public class HealthController : MonoBehaviour, IDamageable
         _rig.GetComponentsInChildren<Rigidbody>(_limbsRigids);
 
         RagDollEnable(false);
-    
+    }
+
+    public void Init(){
         _currentHP = _data.MaxHP;
     }
 
     public void OnDamage(float damage, Vector3 point, Vector3 normal)
     {
         _currentHP = Mathf.Clamp(_currentHP - damage, 0, _data.MaxHP);
+        OnDamageEvent?.Invoke(_data.MaxHP, _currentHP);
 
         if(_currentHP <= 0f){
             _isDie = true;

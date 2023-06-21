@@ -1,0 +1,14 @@
+.text {
+    -unity-font-definition: url('project://database/Assets/Font/SUITE-Variable%20SDF%201.asset?fileID=11400000&guid=b417123b3cd725742aca1c66f2a782cf&type=2#SUITE-Variable SDF 1');
+    -unity-font-style: normal;
+    color: rgb(255, 255, 255);
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

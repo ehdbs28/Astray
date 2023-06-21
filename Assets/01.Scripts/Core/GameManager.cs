@@ -26,12 +26,11 @@ public class GameManager : MonoBehaviour
         CreateTimeManager();
         CreateVolume();
         CreateLight();
+        CreateUI();
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.J)){
-            StageManager.Instance.SetStage();
-        }
+    private void Start() {
+        UIManager.Instance.ShowPanel(ScreenType.MainMenu);
     }
 
     private void CreatePool(){
@@ -60,6 +59,10 @@ public class GameManager : MonoBehaviour
 
     private void CreateLight(){
         LightManager.Instance = GetComponent<LightManager>();
+    }
+
+    private void CreateUI(){
+        UIManager.Instance = GetComponent<UIManager>();
     }
 
     public void RunCoroutine(IEnumerator routine){

@@ -63,6 +63,8 @@ public class EnemyController : ModuleController
     {
         _ikController.SetHandIK(1);
         _healthController.LayerDead(true);
+        _weapon.gameObject.SetActive(true);
+        _healthController.Init();
         _actionData.Player = GameObject.FindObjectOfType<PlayerController>();
     }
 

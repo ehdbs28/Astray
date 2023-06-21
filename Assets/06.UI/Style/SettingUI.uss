@@ -1,0 +1,33 @@
+.setting-btn {
+    width: 40%;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.59);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.setting-btn > #text {
+    font-size: 30px;
+}
+
+.setting-btn:hover {
+    background-color: rgba(0, 0, 0, 0.39);
+}
+
+.setting-btn.on {
+    background-color: rgba(0, 0, 0, 0.39);
+}
+
+.setting-content {
+    width: 100%;
+    height: 30%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

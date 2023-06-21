@@ -16,4 +16,11 @@ public class StageManager
         _currentStage = PoolManager.Instance.Pop($"Stage{_currentStageNum}") as Stage;
         _currentStage?.Setting();
     }
+
+    public void ExitStage(){
+        if(_currentStage != null){
+            PoolManager.Instance.Push(_currentStage);
+            _currentStage = null;
+        }
+    }
 }

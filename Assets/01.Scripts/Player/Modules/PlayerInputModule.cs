@@ -12,6 +12,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
     public event Action OnDodgeKeyPress = null;
     public event Action OnAttackKeyPress = null;
     public event Action<bool> OnAbilityKeyPress = null;
+    public event Action OnReloadKeyPress = null;
 
     [SerializeField]
     private KeyCode _jumpKey;
@@ -21,6 +22,9 @@ public class PlayerInputModule : CommonModule<PlayerController>
 
     [SerializeField]
     private KeyCode _dodgeKey;
+
+    [SerializeField]
+    private KeyCode _reloadKey = KeyCode.R;
 
     private Vector3 _dirInput;
 
@@ -43,6 +47,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         UpdateDodgeInput();
         UpdateAttackInput();
         UpdateAbilityInput();
+        UpdateReloadInput();
     }
 
     public override void OnExitModule()
@@ -57,6 +62,12 @@ public class PlayerInputModule : CommonModule<PlayerController>
     private void UpdateJumpInput(){
         if(Input.GetKeyDown(_jumpKey)){
             OnJumpKeyPress?.Invoke();
+        }
+    }
+
+    private void UpdateReloadInput(){
+        if(Input.GetKeyDown(_reloadKey)){
+            OnReloadKeyPress?.Invoke();
         }
     }
 

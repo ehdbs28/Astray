@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/06.UI/Style/TitleUI.uss?fileID=7433441132597879392&amp;guid=bbadc9fb1295dbc40b6b9acd20046644&amp;type=3#TitleUI" />
+    <Style src="project://database/Assets/06.UI/Style/MainStyle.uss?fileID=7433441132597879392&amp;guid=1199a229056420c488694af378f0de18&amp;type=3#MainStyle" />
+    <ui:VisualElement name="container" style="background-image: url(&apos;project://database/Assets/07.Textures/RenderTexture/TitleCapture.renderTexture?fileID=8400000&amp;guid=341555368c1f602468607b19a0bcb2f4&amp;type=2#TitleCapture&apos;);">
+        <ui:Label text="UNTITLED" display-tooltip-when-elided="true" name="title-text" class="text title-text" />
+        <ui:VisualElement name="menu" class="menu">
+            <ui:VisualElement name="start-btn" class="menu-btn">
+                <ui:Label text="START" display-tooltip-when-elided="true" name="text" class="text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="setting-btn" class="menu-btn">
+                <ui:Label text="SETTING" display-tooltip-when-elided="true" name="text" class="text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="exit-btn" class="menu-btn">
+                <ui:Label text="QUIT" display-tooltip-when-elided="true" name="text" class="text" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

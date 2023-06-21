@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,24 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     [SerializeField]
     private float _damage;
 
+    [SerializeField]
+    private float _reloadDelay = 0.5f;
+
     private bool _canAttack = false;
+    private bool _isReloading = false;
 
     private float _attackStartTime;
 
     private Vector3 _attackDir;
+
+    private const int _maxBullet = 30;
+    private int _currentBullet = 0;
+
+    public Action<int, int> OnBulletCountEvent = null;
+
+    public override void OnEnterModule(){
+        _currentBullet = _maxBullet;
+    }
 
     public override void OnUpdateModule()
     {
@@ -35,9 +49,16 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     }
 
     public void OnAttackHandle(){
-        if(_canAttack == true){
+        if(_canAttack == true  && _isReloading == false){
             _attackStartTime = Time.time;
             _canAttack = false;
+            _currentBullet = Mathf.Clamp(_currentBullet - 1, 0, _maxBullet);
+            OnBulletCountEvent?.Invoke(_maxBullet, _currentBullet);
+
+            if(_currentBullet <= 0){
+                StartCoroutine(Reload());
+                return;
+            }
 
             StartCoroutine(GunReaction());
 
@@ -58,13 +79,25 @@ public class WeaponAttackModule : CommonModule<WeaponController>
         _attackDir = dir;
     }
 
+    public void Reloading(){
+        if(_isReloading == false)
+            StartCoroutine(Reload());
+    }
+
+    private IEnumerator Reload(){
+        _isReloading = true;
+        yield return new WaitForSeconds(_reloadDelay);
+        _currentBullet = _maxBullet;
+        _isReloading = false;
+        OnBulletCountEvent?.Invoke(_maxBullet, _currentBullet);
+    }
+
     private IEnumerator GunReaction(){
         _controller.transform.position += _attackDir * 0.03f * -1f;
         yield return new WaitForSeconds(_attackDelay / 2);
         _controller.transform.position -= _attackDir * 0.03f * -1f;
     }
 
-    public override void OnEnterModule(){}
     public override void OnFixedUpdateModule(){}
     public override void OnExitModule(){}
 }

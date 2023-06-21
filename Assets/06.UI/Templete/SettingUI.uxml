@@ -1,0 +1,41 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/06.UI/Style/MainStyle.uss?fileID=7433441132597879392&amp;guid=1199a229056420c488694af378f0de18&amp;type=3#MainStyle" />
+    <Style src="project://database/Assets/06.UI/Style/SettingUI.uss?fileID=7433441132597879392&amp;guid=abe585dd44fe36e46a54235928ba4906&amp;type=3#SettingUI" />
+    <ui:VisualElement name="setting-container" style="width: 960px; height: 540px; left: 480px; position: absolute; top: 270px; background-color: rgba(255, 255, 255, 0.69); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+        <ui:VisualElement name="header" style="flex-basis: 15%; flex-direction: row; justify-content: flex-start; align-items: center; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+            <ui:Label text="SETTING" display-tooltip-when-elided="true" name="title" class="text" style="font-size: 35px; color: rgb(0, 0, 0);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-basis: 65%; align-items: center; justify-content: space-around; border-top-color: rgba(0, 0, 0, 0.59); border-bottom-color: rgba(0, 0, 0, 0.59); border-top-width: 2px; border-bottom-width: 2px;">
+            <ui:VisualElement name="bgm" class="setting-content">
+                <ui:Label text="BGM" display-tooltip-when-elided="true" name="text" class="text" style="color: rgb(0, 0, 0); font-size: 40px;" />
+                <ui:VisualElement name="buttons" style="flex-direction: row; align-items: center; justify-content: space-between; width: 40%;">
+                    <ui:VisualElement name="on-btn" class="setting-btn">
+                        <ui:Label text="ON" display-tooltip-when-elided="true" name="text" class="text" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="off-btn" class="setting-btn">
+                        <ui:Label text="OFF" display-tooltip-when-elided="true" name="text" class="text" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="sfx" class="setting-content">
+                <ui:Label text="SFX" display-tooltip-when-elided="true" name="text" class="text" style="color: rgb(0, 0, 0); font-size: 40px;" />
+                <ui:VisualElement name="buttons" style="flex-direction: row; align-items: center; justify-content: space-between; width: 40%;">
+                    <ui:VisualElement name="on-btn" class="setting-btn">
+                        <ui:Label text="ON" display-tooltip-when-elided="true" name="text" class="text" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="off-btn" class="setting-btn">
+                        <ui:Label text="OFF" display-tooltip-when-elided="true" name="text" class="text" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="footer" style="flex-basis: 20%; flex-direction: row; align-items: center; justify-content: space-around;">
+            <ui:VisualElement name="back-btn" class="setting-btn" style="width: 20%; height: 80px;">
+                <ui:Label text="돌아가기" display-tooltip-when-elided="true" name="text" class="text" />
+            </ui:VisualElement>
+            <ui:VisualElement name="menu-btn" class="setting-btn" style="width: 20%; height: 80px;">
+                <ui:Label text="메인메뉴" display-tooltip-when-elided="true" name="text" class="text" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

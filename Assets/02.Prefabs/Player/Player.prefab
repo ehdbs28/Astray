@@ -62,6 +62,7 @@ MonoBehaviour:
   _attackDelay: 0.15
   _bulletSpeed: 1000
   _damage: 10
+  _reloadDelay: 0.5
 --- !u!1 &6801510547613270476
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,17 +175,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 6801510547713470921}
-        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
-        m_MethodName: DropWeapon
-        m_Mode: 1
+      - m_Target: {fileID: 6801510547713470926}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6801510547640711650
 GameObject:
@@ -271,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2dd3897673df14fad1b2efe52b7e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteDelay: 5
 --- !u!54 &1227530696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -435,6 +435,7 @@ MonoBehaviour:
   _jumpKey: 32
   _sprintKey: 304
   _dodgeKey: 306
+  _reloadKey: 114
 --- !u!114 &6801510548115956505
 MonoBehaviour:
   m_ObjectHideFlags: 0

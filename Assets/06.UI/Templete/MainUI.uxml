@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/06.UI/Style/TitleUI.uss?fileID=7433441132597879392&amp;guid=bbadc9fb1295dbc40b6b9acd20046644&amp;type=3#TitleUI" />
+    <Style src="project://database/Assets/06.UI/Style/SettingUI.uss?fileID=7433441132597879392&amp;guid=abe585dd44fe36e46a54235928ba4906&amp;type=3#SettingUI" />
+    <Style src="project://database/Assets/06.UI/Style/MainStyle.uss?fileID=7433441132597879392&amp;guid=1199a229056420c488694af378f0de18&amp;type=3#MainStyle" />
+    <Style src="project://database/Assets/06.UI/Style/InGameUI.uss?fileID=7433441132597879392&amp;guid=e72e8b4a3a1497f44ba37cfc0bab49f3&amp;type=3#InGameUI" />
+    <ui:VisualElement name="main-container" style="width: 100%; height: 100%;" />
+</ui:UXML>

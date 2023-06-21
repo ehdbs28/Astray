@@ -65,4 +65,10 @@ public class HealthController : MonoBehaviour, IDamageable
         _characterController.enabled = !value;
         _mainAnimator.enabled = !value;
     }
+
+    public void LayerDead(bool alive){
+        foreach(var col in _ragDollCols){
+            col.gameObject.layer = (alive ? 0 : 8);
+        }
+    }
 }

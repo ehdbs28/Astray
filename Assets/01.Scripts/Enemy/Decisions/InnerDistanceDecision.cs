@@ -14,6 +14,7 @@ public class InnerDistanceDecision : AIDecision
     public override bool MakeADecision()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, _distance, _whatIsLayer);
+        
         return cols.Length > 0;
     }
 

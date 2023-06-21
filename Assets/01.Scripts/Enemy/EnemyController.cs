@@ -27,6 +27,8 @@ public class EnemyController : ModuleController
 
     private PlayerIKController _ikController;
 
+    private HealthController _healthController;
+
     private int _frontDir;
 
     private Coroutine _runningCoroutine = null;
@@ -35,6 +37,7 @@ public class EnemyController : ModuleController
     {
         _actionData = transform.GetComponent<EnemyActionData>();
         _ikController = transform.Find("Visual").GetComponent<PlayerIKController>();
+        _healthController = GetComponent<HealthController>();
         base.Awake();
     }
 
@@ -45,14 +48,22 @@ public class EnemyController : ModuleController
     protected override void Update(){
         _currentModule?.OnUpdateModule();
 
-        if(_actionData.Player){
+        if(_actionData.IsDetection){
             SetFrontDir();
             SetLookPos();
+            WeaponRotate();
         }
     }
 
     protected override void FixedUpdate(){
         _currentModule?.OnFixedUpdateModule();
+    }
+
+    public override void Init()
+    {
+        _ikController.SetHandIK(1);
+        _healthController.LayerDead(true);
+        _actionData.Player = GameObject.FindObjectOfType<PlayerController>();
     }
 
     private void SetFrontDir(){
@@ -65,6 +76,21 @@ public class EnemyController : ModuleController
     private void SetLookPos(){
         Vector3 lookPos = _actionData.Player.transform.Find("Visual").GetComponent<PlayerIKController>().Head.position;
         _ikController.SetLookPos(lookPos);
+    }
+
+    private void WeaponRotate(){
+        Vector3 attackDir = (_actionData.Player.transform.position
+                            - transform.position).normalized;
+
+        float cos = Vector3.Dot(Vector3.right, attackDir);
+        float theta = Mathf.Acos(cos) * Mathf.Rad2Deg;
+
+        if(_actionData.Player.transform.position.y <= _weapon.transform.position.y){
+            theta *= -1f;
+        }
+        
+        _weapon.GetModule<WeaponRotateModule>().SetWeaponRotate(theta);
+        _weapon.GetModule<WeaponAttackModule>().SetAttackDir(attackDir);
     }
 
     private void RotateDir(){

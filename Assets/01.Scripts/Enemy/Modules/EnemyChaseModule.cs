@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyChaseModule : AIModule
 {
     public override void OnEnterModule(){
+        _controller.ActionData.IsDetection = true;
         _controller.GetModule<EnemyAnimationModule>().SetSpeed(0.2f);
     }
 

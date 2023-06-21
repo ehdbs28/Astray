@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class EnemyActionData : MonoBehaviour
 {
+    public bool IsDetection = false;
     public PlayerController Player;
 }

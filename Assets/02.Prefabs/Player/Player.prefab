@@ -61,7 +61,7 @@ MonoBehaviour:
   _firePos: {fileID: 6801510548260386138}
   _attackDelay: 0.15
   _bulletSpeed: 1000
-  _damage: 10
+  _damage: 25
   _reloadDelay: 0.5
 --- !u!1 &6801510547613270476
 GameObject:
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fae8405cb3e8f44bd7c97875bdbfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeSlowValue: 0.168
+  _timeSlowValue: 0.45
 --- !u!1 &6801510548244206965
 GameObject:
   m_ObjectHideFlags: 0

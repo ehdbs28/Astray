@@ -44,7 +44,7 @@ public class InGameScreen : UIScreen
     }
 
     private void OnBulletHandle(int maxBullet, int currentBullet){
-        float value = Mathf.Lerp(0f, 1f, currentBullet / maxBullet);
+        float value = Mathf.Lerp(0f, 1f, (float)currentBullet / (float)maxBullet);
         _bulletValue.style.scale = new StyleScale(new Scale(new Vector3(value, 1)));
     }
 }

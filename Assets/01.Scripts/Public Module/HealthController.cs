@@ -47,7 +47,7 @@ public class HealthController : MonoBehaviour, IDamageable
         _currentHP = _data.MaxHP;
     }
 
-    public void OnDamage(float damage, Vector3 point, Vector3 normal)
+    public bool OnDamage(float damage, Vector3 point, Vector3 normal)
     {
         _currentHP = Mathf.Clamp(_currentHP - damage, 0, _data.MaxHP);
         OnDamageEvent?.Invoke(_data.MaxHP, _currentHP);
@@ -55,7 +55,10 @@ public class HealthController : MonoBehaviour, IDamageable
         if(_currentHP <= 0f){
             _isDie = true;
             OnDieEvent?.Invoke();
+            return true;
         }
+
+        return false;
     }
 
     public void RagDollEnable(bool value){

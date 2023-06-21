@@ -39,4 +39,30 @@ public class CameraManager : MonoBehaviour
 
         return virtualCam;
     }
+
+    public void ShakeCam(float intensity, float duration){
+        if(_currentVCam.Perlin == null)
+            return;
+
+        StopAllCoroutines();
+        StartCoroutine(ShakeCamCoroutine(intensity, duration));
+    }
+
+    IEnumerator ShakeCamCoroutine(float intensity, float endTime){
+        _currentVCam.Perlin.m_AmplitudeGain = intensity;
+
+        float currentTime = 0f;
+        while(currentTime < endTime){
+            yield return null;
+            
+            if (_currentVCam.Perlin == null) 
+                break;
+
+            _currentVCam.Perlin.m_AmplitudeGain = Mathf.Lerp(intensity, 0, currentTime / endTime);
+            currentTime += Time.deltaTime;
+        }
+
+        if(_currentVCam.Perlin != null)
+            _currentVCam.Perlin.m_AmplitudeGain = 0;
+    }
 } 

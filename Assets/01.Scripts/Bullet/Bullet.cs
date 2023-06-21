@@ -89,7 +89,15 @@ public class Bullet : PoolableMono
             Vector3 point = other.contacts[0].point;
             Vector3 normal = other.contacts[0].normal;
 
-            damageable.OnDamage(_damage, point, normal);
+            PoolableParticle bloodEffect = PoolManager.Instance.Pop("BloodEffect") as PoolableParticle;
+            bloodEffect.SetPositionAndRotation(point, Quaternion.LookRotation(Vector3.forward));
+            bloodEffect.Play();
+
+            bool isDie = damageable.OnDamage(_damage, point, normal);
+
+            if(isDie){
+                CameraManager.Instance.ShakeCam(10, 0.05f);
+            }
         }
     }
 

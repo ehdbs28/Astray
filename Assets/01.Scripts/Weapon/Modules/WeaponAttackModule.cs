@@ -62,6 +62,10 @@ public class WeaponAttackModule : CommonModule<WeaponController>
 
             StartCoroutine(GunReaction());
 
+            if(_targetType == LivingType.ENEMY){
+                CameraManager.Instance.ShakeCam(0.75f, _attackDelay / 2);
+            }
+
             Vector3 firePos = _firePos.position;
             firePos.z = 0f;
 

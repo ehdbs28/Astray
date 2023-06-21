@@ -5,13 +5,14 @@ using Cinemachine;
 
 public abstract class VCam : MonoBehaviour
 {
-    protected CinemachineVirtualCamera _vCam;
+    public CinemachineVirtualCamera VirtualCam;
+    public CinemachineBasicMultiChannelPerlin Perlin = null;
 
     private CameraType _type;
     public CameraType Type => _type;
 
-    private void Awake() {
-        _vCam = GetComponent<CinemachineVirtualCamera>();
+    public virtual void Awake() {
+        VirtualCam = GetComponent<CinemachineVirtualCamera>();
     }
 
     public virtual void Setting(CameraType type){
@@ -19,11 +20,11 @@ public abstract class VCam : MonoBehaviour
     }
 
     public virtual void OnVCam(){
-        _vCam.Priority = 10;
+        VirtualCam.Priority = 10;
     }
 
     public virtual void OffVCam(){
-        _vCam.Priority = 0;
+        VirtualCam.Priority = 0;
     }
 
     public abstract void UpdateVCam();

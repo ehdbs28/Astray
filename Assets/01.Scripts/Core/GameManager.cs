@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
         CreatePool();
         CreateCamera();
         CreateStageManager();
+        CreateTimeManager();
+        CreateVolume();
+        CreateLight();
     }
 
     private void Update() {
@@ -45,5 +48,21 @@ public class GameManager : MonoBehaviour
 
     private void CreateCamera(){
         CameraManager.Instance = GetComponent<CameraManager>();
+    }
+
+    private void CreateTimeManager(){
+        TimeManager.Instance = new TimeManager();
+    }
+
+    private void CreateVolume(){
+        VolumeManager.Instance = GetComponent<VolumeManager>();
+    }
+
+    private void CreateLight(){
+        LightManager.Instance = GetComponent<LightManager>();
+    }
+
+    public void RunCoroutine(IEnumerator routine){
+        StartCoroutine(routine);
     }
 }

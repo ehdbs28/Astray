@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager
 {
     public static TimeManager Instance;
 
@@ -16,8 +16,8 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void TimeLag(float dest, float duration, Action Callback = null){
-        StartCoroutine(TimeLagCoroutine(dest, duration, Callback));
+    public void TimeLag(float dest, float duration, Action Callback = null){
+        GameManager.Instance.RunCoroutine(TimeLagCoroutine(dest, duration, Callback));
     }
 
     private IEnumerator TimeLagCoroutine(float dest, float duration, Action Callback = null){

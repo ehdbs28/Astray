@@ -11,6 +11,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
     public event Action<bool> OnSprintKeyPress = null;
     public event Action OnDodgeKeyPress = null;
     public event Action OnAttackKeyPress = null;
+    public event Action<bool> OnAbilityKeyPress = null;
 
     [SerializeField]
     private KeyCode _jumpKey;
@@ -41,6 +42,7 @@ public class PlayerInputModule : CommonModule<PlayerController>
         UpdateFrontDir();
         UpdateDodgeInput();
         UpdateAttackInput();
+        UpdateAbilityInput();
     }
 
     public override void OnExitModule()
@@ -55,6 +57,15 @@ public class PlayerInputModule : CommonModule<PlayerController>
     private void UpdateJumpInput(){
         if(Input.GetKeyDown(_jumpKey)){
             OnJumpKeyPress?.Invoke();
+        }
+    }
+
+    private void UpdateAbilityInput(){
+        if(Input.GetMouseButtonDown(1)){
+            OnAbilityKeyPress?.Invoke(true);
+        }
+        else if(Input.GetMouseButtonUp(1)){
+            OnAbilityKeyPress?.Invoke(false);
         }
     }
 

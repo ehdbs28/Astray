@@ -18,4 +18,4 @@ MonoBehaviour:
   SprintSpeed: 5
   JumpPower: 4
   WallJumpPower: 6
-  MaxHP: 1000
+  MaxHP: 100

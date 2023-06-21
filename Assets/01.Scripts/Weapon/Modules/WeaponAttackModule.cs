@@ -66,6 +66,8 @@ public class WeaponAttackModule : CommonModule<WeaponController>
                 CameraManager.Instance.ShakeCam(0.75f, _attackDelay / 2);
             }
 
+            AudioManager.Instance.PlayOneShot(_controller.AudioSource, "Shot");
+
             Vector3 firePos = _firePos.position;
             firePos.z = 0f;
 
@@ -84,8 +86,11 @@ public class WeaponAttackModule : CommonModule<WeaponController>
     }
 
     public void Reloading(){
-        if(_isReloading == false)
-            StartCoroutine(Reload());
+        if(_isReloading || _currentBullet >= _maxBullet)
+            return;
+
+        AudioManager.Instance.PlayOneShot(_controller.AudioSource, "Reload");
+        StartCoroutine(Reload());
     }
 
     private IEnumerator Reload(){

@@ -60,6 +60,10 @@ public class PlayerController : ModuleController
         _healthController.Init();
     }
 
+    public void StageEnd(){
+        GameManager.Instance.StageEnd();
+    }
+
     private void SetFrontDir(int value){
         RotatePlayerDir();
         _ikController.SetHandIK(value);

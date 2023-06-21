@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform _poolingTrm;
 
+    [SerializeField]
+    private AudioSource _masterSource;
+
     private void Awake() {
         if(Instance != null){
             Debug.LogError("Multiple GameManager is running!");
@@ -27,10 +30,18 @@ public class GameManager : MonoBehaviour
         CreateVolume();
         CreateLight();
         CreateUI();
+        CreateAudio();
     }
 
     private void Start() {
+        AudioManager.Instance.PlayBGM(_masterSource, "BGM");
         UIManager.Instance.ShowPanel(ScreenType.MainMenu);
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            UIManager.Instance.ShowPanel(PopupType.Setting);
+        }
     }
 
     private void CreatePool(){
@@ -63,6 +74,20 @@ public class GameManager : MonoBehaviour
 
     private void CreateUI(){
         UIManager.Instance = GetComponent<UIManager>();
+    }
+
+    private void CreateAudio(){
+        AudioManager.Instance = GetComponent<AudioManager>();
+    }
+
+    public void StageEnd(){
+        StartCoroutine(StageEndCoroutine());
+    }
+
+    private IEnumerator StageEndCoroutine(){
+        yield return new WaitForSecondsRealtime(2f);
+        StageManager.Instance.ExitStage();
+        UIManager.Instance.ShowPanel(ScreenType.MainMenu);
     }
 
     public void RunCoroutine(IEnumerator routine){

@@ -5,8 +5,8 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Player")){
-            
+        if(other.gameObject.layer == 6){
+            GameManager.Instance.StageEnd();
         }
     }
 }

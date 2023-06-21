@@ -16,6 +16,7 @@ public class PlayerAbilityModule : CommonModule<PlayerController>
     public Action<float> OnChangePercentEvent = null;
 
     public override void OnEnterModule(){
+        _isTimeSlow = false;
         _controller.GetModule<PlayerInputModule>().OnAbilityKeyPress += AbilityHandle;
     }
 
